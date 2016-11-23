@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Spring MVC</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="/js/bootstrap/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="/js/bootstrap/css/bootstrap-responsive.min.css"></link>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+ <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+ <![endif]-->
+
+<!--<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>-->
+<script src='js/jquery/jquery-3.1.1.min.js'></script>
+<script src="/js/bootstrap/js/bootstrap.min.js"></script>
+<script src='/js/tinymce/tinymce.min.js'></script>
+<script src='/js/tinymce/jquery.tinymce.min.js'></script>
+<script>
+	tinymce.init({
+		selector : '#mytextarea'
+	});
+	function al() {
+		var editor = tinymce.get('mytextarea');
+		//alert(editor.isDirty());
+		if (editor.isDirty()) {
+			var content = editor.getContent();
+			//content = content.replace("+", "%2B");
+			//content = content.replace("/", "%2F");
+			var datas = {};
+			datas["title"] = jQuery("#title").val();
+			datas["content"] = content;
+			jQuery.ajax({
+				type : "POST",
+				url : "/blog/save",
+				data : datas,
+				cache : true,
+				async : false, //prevents mutliple posts during callback
+				success : function(msg) {
+					alert(msg);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(textStatus);
+				}
+			});
+		} else {
+			return false; // If nothing has changed, don't do anything
+		}
+
+	}
+	function b1() {
+		var datas = {};
+		datas["page"] = 0;
+		datas["size"] = 2;
+		jQuery.ajax({
+			type : "POST",
+			url : "/blog/page/list",
+			data : datas,
+			cache : true,
+			async : false, //prevents mutliple posts during callback
+			success : function(msg) {
+				alert(msg);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus);
+			}
+		});
+
+	}
+</script>
+</head>
+<body>
+	<p th:text="'Hello, ' + ${name} + ' spring mvc !'" />
+	<div class="input-group">
+		<span class="input-group-addon">标题：</span> <input type="text"
+			class="form-control" name="title" id="title" /> <span
+			class="input-group-addon"></span>
+	</div>
+	<form method="post">
+		<textarea id="mytextarea">Hello, World!</textarea>
+	</form>
+	<button onclick="b1()" style="height: 20px; width: 20px"></button>
+
+	<div class="btn-group btn-group-lg">
+		<button type="button" class="btn btn-default" onclick="al()">按钮
+			1</button>
+	</div>
+</body>
+</html>

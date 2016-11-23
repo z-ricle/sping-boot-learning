@@ -1,0 +1,48 @@
+<configuration debug="true">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+	<appender name="ROOT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>E:\\logs\\voice\\sh.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+		</encoder>
+		<!-- <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy> -->
+	</appender>
+  <root level="${logLevel:-DEBUG}">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROOT_FILE" /> 
+  </root>
+  
+  <logger name="org.apache.http.wire" level="${log.level.ancun:-ERROR}" />
+  
+  <logger name="com.ancun.callcenter.persistence.mapper.UserWhiteListMapper" level="${log.level.ancun:-ERROR}" />
+  <logger name="com.ancun.common.biz.persistence.mapper.UserOperatelogMapper" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.mybatis.spring.SqlSessionUtils" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.aop.framework.CglibAopProxy" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.mybatis.spring.transaction.SpringManagedTransaction" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.beans.factory.xml.BeanDefinitionParserDelegate" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.mybatis.spring.mapper.ClassPathMapperScanner" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.core.env.PropertySourcesPropertyResolver" level="${log.level.ancun:-ERROR}" />
+	
+  <logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.beans.factory.annotation.InjectionMetadata" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.jdbc.support.SQLErrorCodesFactory" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="${log.level.ancun:-ERROR}" />
+  <logger name="com.ancun.callcenter.persistence.mapper.TaskXMapper" level="${log.level.ancun:-ERROR}" />
+  <logger name="com.ancun.callcenter.service.task.impl.ExecuteTaskServiceImpl" level="${log.level.ancun:-ERROR}" />
+  <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="${log.level.ancun:-ERROR}" />
+</configuration>

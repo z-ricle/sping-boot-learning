@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Spring MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+</head>
+<body>
+	error, hello error!
+	<p th:text="'返回代码:'+${result.status}" />
+	<p th:text="'返回信息:'+${result.message}" />
+	<p th:text="'定位标识:'+${result.tracerId}" />
+	<p th:text="'时间戳:'+${result.timestamp}" />
+</body>
+</html>

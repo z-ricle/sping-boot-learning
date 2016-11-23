@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+<title>Home page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/js/bootstrap/css/bootstrap.min.css"></link>
+<link rel="stylesheet"
+	href="/js/bootstrap/css/bootstrap-responsive.min.css"></link>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+ <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+ <![endif]-->
+<style type="text/css">
+.bs-callout+.bs-callout {
+	margin-top: -5px;
+}
+
+.bs-callout-info {
+	border-left-color: #1b809e;
+}
+
+.bs-callout {
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-radius: 3px;
+}
+
+.input-group {
+	margin: 20px 0;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12" style="height: 15px"></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-9 col-sm-9 col-md-9">
+				<!-- <div class="bs-callout bs-callout-info">
+					<h4>Overflowing content</h4>
+					<p></p>
+				</div> -->
+				<div th:each="list:${page.list}" class="bs-callout bs-callout-info">
+					<h4 th:text="${list.title}"></h4>
+				</div>
+
+			</div>
+
+			<div class="col-xs-3 col-sm-3 col-md-3">
+				<div class="row">
+					<div class="col-xs-9 col-sm-9 col-md-9">
+						<div class="input-group">
+							<input type="text" class="form-control" /> <span
+								class="input-group-btn">
+								<button class="btn btn-default" type="button">Go!</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src='js/jquery/jquery-3.1.1.min.js'></script>
+	<script src="/js/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

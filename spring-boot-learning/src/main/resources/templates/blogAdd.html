@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Spring MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>-->
+    <script src='js/jquery/jquery-3.1.1.min.js'></script>
+    <script src='/js/tinymce/tinymce.min.js'></script>
+    <script src='/js/tinymce/jquery.tinymce.min.js'></script>
+    <script>
+	  tinymce.init({
+	    selector: '#mytextarea'
+	  });
+	  function al(){
+		  var editor = tinymce.get('mytextarea'); 
+		  alert(editor.isDirty());
+		  if (editor.isDirty()) {
+			var content = editor.getContent();
+			alert(content);
+			content = content.replace("+", "%2B");
+			content = content.replace("/", "%2F");
+			alert(content);
+			$.ajax({
+				type: "POST",
+				url: "/blog/save",
+				data: "content=" + content,
+				cache: true,
+				async: false, //prevents mutliple posts during callback
+				success: function (msg) {
+				alert(msg);
+				}
+			});
+		  } else {
+			return false; // If nothing has changed, don't do anything
+		  } 
+	  
+	  }
+	</script>
+</head>
+<body>
+    <p th:text="'Hello, ' + ${name} + ' spring mvc !'" />
+    <form method="post">
+    	<textarea id="mytextarea">Hello, World!</textarea>
+    </form>
+    <button onclick="al()" style="height:20px;width:20px"></button>
+</body>
+</html>
